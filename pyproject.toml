@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agroscore"
+version = "0.1.0"
+description = "MVP de scoring de riesgo crediticio agropecuario con Sentinel-2 y NASA POWER"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "shapely>=2.0",
+    "pyproj>=3.5",
+    "pyyaml>=6.0",
+    "requests>=2.31",
+    "joblib>=1.3",
+]
+
+[project.optional-dependencies]
+# Descarga real de imágenes Sentinel-2 (Planetary Computer)
+satelital = [
+    "pystac-client>=0.7",
+    "planetary-computer>=1.0",
+    "odc-stac>=0.3.9",
+    "rioxarray>=0.15",
+]
+dashboard = [
+    "streamlit>=1.30",
+    "plotly>=5.18",
+    "folium>=0.15",
+    "streamlit-folium>=0.18",
+]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+agroscore = "agroscore.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+filterwarnings = [
+    "ignore::DeprecationWarning:odc.*",
+    "ignore::PendingDeprecationWarning:odc.*",
+]

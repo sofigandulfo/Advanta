@@ -1,0 +1,64 @@
+# Configuración del MVP. Todos los valores son puntos de partida y deben
+# calibrarse con datos reales (ver METRICAS.md).
+
+nubes:
+  # Descarta escenas completas con nubosidad declarada mayor a este % (eo:cloud_cover).
+  max_nubosidad_escena: 60
+  # Clases SCL de Sentinel-2 L2A consideradas válidas: 4 vegetación, 5 suelo desnudo, 6 agua.
+  # Se descartan 0 sin dato, 1 saturado, 2 áreas oscuras, 3 sombra de nube,
+  # 7 sin clasificar, 8-9 nube prob. media/alta, 10 cirros, 11 nieve.
+  scl_validas: [4, 5, 6]
+  # Una fecha se usa solo si al menos esta fracción de píxeles del lote es válida.
+  min_fraccion_valida: 0.6
+
+series:
+  # Huecos entre observaciones válidas más largos que esto se interpolan igual,
+  # pero quedan marcados como "hueco largo" y bajan la confianza del lote.
+  max_hueco_dias: 30
+  # Suavizado Savitzky-Golay sobre la serie diaria interpolada.
+  savgol_ventana_dias: 21
+  savgol_orden: 2
+  # NDVI de suelo desnudo usado como línea base para el área bajo la curva.
+  ndvi_base: 0.2
+
+# Ventana de campaña por cultivo cuando el CSV no trae fecha de siembra.
+# inicio en el primer año de la campaña (ej. 2022 en "2022/23"), fin en el segundo.
+# Con fecha_siembra: desde siembra - 15 días hasta siembra + duracion_dias.
+cultivos:
+  soja:
+    inicio: "10-15"
+    fin: "04-30"
+    duracion_dias: 170
+  maiz:
+    inicio: "09-01"
+    fin: "03-31"
+    duracion_dias: 190
+
+# Período crítico relativo a la fecha del pico de NDVI (días).
+# Aproximación: floración / llenado de grano se ubican alrededor y después del pico.
+periodo_critico:
+  dias_antes_pico: 20
+  dias_despues_pico: 30
+
+clima:
+  temp_estres_calor: 35   # °C, Tmax que cuenta como día de estrés
+  temp_base_gdd: 10       # °C, base para grados-día
+
+score:
+  # Precio de referencia por cultivo (USD por tonelada).
+  precio_usd_t:
+    soja: 300
+    maiz: 180
+  # Costo o deuda de referencia por cultivo (USD/ha). Si el CSV de lotes trae
+  # la columna costo_usd_ha, ese valor tiene prioridad para ese lote.
+  costo_usd_ha:
+    soja: 550
+    maiz: 800
+  # Rinde pesimista = rinde estimado - k * RMSE de validación del cultivo.
+  k_incertidumbre: 1.0
+  # Mapeo lineal de la cobertura (ingreso / costo) a 0-1000.
+  cobertura_score_0: 0.8
+  cobertura_score_1000: 1.6
+  # Categorías de riesgo según la cobertura.
+  umbral_riesgo_alto: 1.0   # cobertura < 1.0  -> alto
+  umbral_riesgo_bajo: 1.3   # cobertura >= 1.3 -> bajo; en el medio -> medio

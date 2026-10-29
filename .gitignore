@@ -1,0 +1,22 @@
+# Datos reales de productores: NUNCA se versionan
+data/private/*
+!data/private/LEEME.md
+data/cache/
+
+# Salidas regenerables
+outputs/
+models/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Credenciales
+.env
+*.env
