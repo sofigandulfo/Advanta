@@ -1,0 +1,51 @@
+# Tema del dashboard según el manual de marca de Advanta.
+# Colores institucionales: Advanta Blue #102D69, Advanta Green #13A538.
+# Tipografías: Noto Sans (principal) con Arial (digital) como respaldo.
+
+[theme]
+font = "Noto Sans:https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700;900&display=swap, Arial, sans-serif"
+headingFont = "Noto Sans:https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700;900&display=swap, Arial, sans-serif"
+headingFontWeights = [900, 700, 700, 600, 600, 600]
+baseRadius = "0.75rem"
+showWidgetBorder = true
+chartCategoricalColors = ["#1961AC", "#EA580C", "#13A538", "#FBBA00", "#8E1C3F"]
+
+[theme.light]
+primaryColor = "#13A538"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F2F4F8"
+textColor = "#0C1C49"
+borderColor = "#DCE2EC"
+linkColor = "#1961AC"
+redColor = "#E7344C"
+orangeColor = "#EA580C"
+yellowColor = "#C99500"
+greenColor = "#13A538"
+blueColor = "#1961AC"
+
+[theme.light.sidebar]
+backgroundColor = "#102D69"
+secondaryBackgroundColor = "#0C1C49"
+textColor = "#FFFFFF"
+borderColor = "#3A5590"
+primaryColor = "#95C11F"
+
+[theme.dark]
+primaryColor = "#13A538"
+backgroundColor = "#0B1735"
+secondaryBackgroundColor = "#132654"
+textColor = "#EEF2F8"
+borderColor = "#24396B"
+linkColor = "#7DB0EA"
+redColor = "#E7344C"
+orangeColor = "#EA580C"
+yellowColor = "#FBBA00"
+greenColor = "#13A538"
+blueColor = "#4F93E3"
+
+[theme.dark.sidebar]
+backgroundColor = "#0C1C49"
+secondaryBackgroundColor = "#081333"
+textColor = "#FFFFFF"
+borderColor = "#24396B"
+primaryColor = "#95C11F"

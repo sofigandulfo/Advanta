@@ -94,6 +94,20 @@ guarda junto con sus métricas, las campañas usadas y la fecha de entrenamiento
 El dashboard lee `outputs/`. Para ver otra carpeta:
 `AGROSCORE_SALIDA=outputs/aliado streamlit run app/dashboard.py`.
 
+## Dashboard
+
+`streamlit run app/dashboard.py` abre tres pestañas:
+- **Lote:** score y riesgo, la barra de 0 a 1000 con las zonas de riesgo, el cálculo paso a paso, el mapa (calles o satélite) y la curva de NDVI con siembra, período crítico y fechas descartadas por nubes. El precio, el costo y el margen se pueden ajustar en vivo.
+- **Cartera:** cantidad de lotes por nivel de riesgo y campaña, y una tabla ordenada por score.
+- **Modelo:** métricas por cultivo y por campaña, y el rinde estimado contra el real (fuera de muestra).
+
+El estilo sigue el manual de marca de Advanta: azul y verde institucionales, Noto Sans (con Arial
+de respaldo) y el logo en `app/assets/`. El tema está en `.streamlit/config.toml` y tiene versión clara
+y oscura. Los números usan formato argentino (1.418 kg/ha, 0,55).
+
+La capa satelital del mapa usa teselas de Esri World Imagery. Revisá sus términos antes de cualquier
+uso comercial.
+
 ## Metodología
 
 ### Nubes (Sentinel-2 L2A)
